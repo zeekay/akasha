@@ -1,49 +1,23 @@
-import store   from 'store'
-import cookies from 'es-cookies'
+import cookieStorage  from './cookie-storage'
+import localStorage   from './local-storage'
+import sessionStorage from './session-storage'
 
-import md5 from 'crypto-js/md5'
-postFix = md5 window.location.host
+export {cookieStorage}
+export {sessionStorage}
+export {localStorage}
 
-if store.enabled
-  module.exports =
-    get: (k)->
-      k += "_" + postFix
-      store.get k
-    set: (k, v)->
-      k += "_" + postFix
-      store.set k, v
+export supported = (storage) ->
+  try
+    testStr = '__akasha__test__'
+    storage.set testStr, testStr
+    ok = (storage.get testStr) == testStr
+    storage.remove testStr
+    ok
+  catch err
+    false
 
-    remove: (k)->
-      k += "_" + postFix
-      store.remove k
-
-    clear: ->
-      store.clear()
-else
-  module.exports =
-    get: (k)->
-      k += "_" + postFix
-      v = cookie.get(k)
-      try
-        v = JSON.parse v
-      catch e
-
-      return v
-
-    set: (k, v)->
-      k += "_" + postFix
-      keys = cookie.get('_keys' + postFix) ? ''
-      cookie.set '_keys', keys += ' ' + k
-      return cookie.set k, JSON.stringify(v)
-
-    remove: (k)->
-      k+= "_" + postFix
-      cookie.remove k
-
-    clear: ->
-      keys = cookie.get('_keys' + postFix) ? ''
-      ks = keys.split ' '
-      for k in ks
-        cookie.remove k
-
-      cookie.remove '_keys'
+export default do ->
+  if supported localStorage
+    localStorage
+  else
+    cookieStorage
