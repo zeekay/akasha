@@ -11,8 +11,8 @@ task 'build', 'build project', ->
   handroll = require 'handroll'
 
   bundle = yield handroll.bundle
-    entry:     'src/index.coffee'
-    external:  true
+    entry:    'src/index.coffee'
+    external: true
 
   yield bundle.write format: 'cjs'
   yield bundle.write format: 'es'
