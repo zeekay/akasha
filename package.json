@@ -45,7 +45,7 @@
     "coffee-script": "1.12.4",
     "coveralls": "2.11.16",
     "es5-shim": "4.5.9",
-    "handroll": "0.2.6",
+    "handroll": "0.2.9",
     "istanbul": "0.4.5",
     "mocha": "3.2.0",
     "mz": "2.6.0",
@@ -54,7 +54,7 @@
     "uglify-js": "2.8.7"
   },
   "dependencies": {
-    "es-cookies": "2.1.5",
+    "es-cookies": "2.1.6",
     "es-md5": "2.7.1"
   }
 }
