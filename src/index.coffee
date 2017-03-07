@@ -1,7 +1,7 @@
-store = require 'store'
-cookie = require 'js-cookie'
+import store   from 'store'
+import cookies from 'es-cookies'
 
-md5 = require 'crypto-js/md5'
+import md5 from 'crypto-js/md5'
 postFix = md5 window.location.host
 
 if store.enabled
